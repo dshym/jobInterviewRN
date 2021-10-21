@@ -29,6 +29,12 @@ const AlbumsScreen = () => {
     dispatch(fetchAlbums());
   }, []);
 
+  const refreshData = () => {
+    setIsRefreshing(true);
+    dispatch(fetchAlbums());
+    setIsRefreshing(false);
+  };
+
   if (albumsError) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -47,9 +53,7 @@ const AlbumsScreen = () => {
 
   return (
     <FlatList<Album>
-      onRefresh={() => {
-        dispatch(fetchAlbums());
-      }}
+      onRefresh={refreshData}
       refreshing={isRefreshing}
       data={albums}
       keyExtractor={(item) => item.id.toString()}

@@ -22,12 +22,6 @@ interface NewsDetailsProps {
   navigation: NavigationStackProp<{ id: string }>;
 }
 
-interface CommentInterface {
-  id: string;
-  name: string;
-  body: string;
-}
-
 const NewsDetailsScreen: React.FC<NewsDetailsProps> = ({ navigation }) => {
   const id = navigation.getParam('id'); //post id
   const title = navigation.getParam('title');

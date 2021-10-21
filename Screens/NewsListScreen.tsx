@@ -21,6 +21,12 @@ const NewsListScreen: React.FC = (props: any) => {
     dispatch(newsActions.fetchNews());
   }, []);
 
+  const refreshData = () => {
+    setIsRefrashing(true);
+    dispatch(newsActions.fetchNews());
+    setIsRefrashing(false);
+  };
+
   if (error) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -39,9 +45,7 @@ const NewsListScreen: React.FC = (props: any) => {
 
   return (
     <FlatList<New>
-      onRefresh={() => {
-        dispatch(newsActions.fetchNews());
-      }}
+      onRefresh={refreshData}
       refreshing={isRefrashing}
       data={news}
       keyExtractor={(item) => item.id.toString()}
