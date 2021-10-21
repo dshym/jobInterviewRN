@@ -1,13 +1,31 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, SafeAreaView } from 'react-native';
+import { Provider } from 'react-redux';
+import { createStore, applyMiddleware, combineReducers } from 'redux';
+import thunk from 'redux-thunk';
+import NewsNavigator from './navigation/MainNavigator';
+
+import newsReducer from './store/reducers/news';
+import albumsReducer from './store/reducers/albums';
+import commentsReducer from './store/reducers/comments';
+
+const reducers = combineReducers({
+  news: newsReducer,
+  albums: albumsReducer,
+  comments: commentsReducer,
+});
+
+export type RootState = ReturnType<typeof reducers>;
+
+const store = createStore(reducers, applyMiddleware(thunk));
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <NewsNavigator />
+      </Provider>
+    </SafeAreaView>
   );
 }
 

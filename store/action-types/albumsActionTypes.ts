@@ -1,0 +1,5 @@
+export enum AlbumsActionTypes {
+  SET_ALBUMS = 'SET_ALBUMS',
+  SET_LOADING = 'SET_LOADING',
+  SET_ALBUMS_ERROR = 'SET_ALBUMS_ERROR',
+}
