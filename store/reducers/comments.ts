@@ -18,9 +18,11 @@ const reducer = (state: CommentsState = initialState, action: any) => {
         comments: action.comments,
       };
     case CommentsActionTypes.ADD_COMMENT:
+      const newCommentsArr = [...state.comments];
+      newCommentsArr.unshift(action.comment);
       return {
         ...state,
-        comments: state.comments.concat(action.comment),
+        comments: newCommentsArr,
       };
     case CommentsActionTypes.SET_COMMENTS_ERROR:
       return {

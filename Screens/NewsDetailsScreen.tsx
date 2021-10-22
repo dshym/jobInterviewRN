@@ -27,6 +27,7 @@ const NewsDetailsScreen: React.FC<NewsDetailsProps> = ({ navigation }) => {
   const title = navigation.getParam('title');
   const description = navigation.getParam('description');
   const [comment, setComment] = useState('');
+
   const { comments, commentsError } = useTypedSelector(
     (state) => state.comments
   );
@@ -36,7 +37,6 @@ const NewsDetailsScreen: React.FC<NewsDetailsProps> = ({ navigation }) => {
   const sendCommentHandler = () => {
     if (comment.trim().length > 0) {
       dispatch(sendComment(id, comment));
-      setComment('Here you can add your comment');
     }
   };
 
@@ -79,7 +79,7 @@ const NewsDetailsScreen: React.FC<NewsDetailsProps> = ({ navigation }) => {
             <Text>{commentsError}</Text>
           </View>
         ) : (
-          comments.reverse().map((comment: any) => {
+          comments.map((comment: any) => {
             return (
               <Comment
                 key={comment.id}
